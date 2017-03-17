@@ -13,7 +13,7 @@ DEFUN_DLD(polyUnion, args, , "polyUnion help")
 	else
 	{	
 		Cell x=args(0).cell_value();
-      	Cell y=args(1).cell_value();
+      		Cell y=args(1).cell_value();
 		ClipperLib::Paths subj1,subj2;
 		for(int i = 0; i < x.numel(); ++i)
 		{
@@ -33,9 +33,14 @@ DEFUN_DLD(polyUnion, args, , "polyUnion help")
 					p.push_back(ip);
 				}
 
-				if(i == 0)		subj1.push_back(p);
-
-				else if(i == 1)	subj2.push_back(p);
+				if(i == 0)		
+				{
+					subj1.push_back(p);
+				}
+				else if(i == 1)	
+				{
+					subj2.push_back(p);
+				}
 			}
 		}
 
@@ -50,14 +55,14 @@ DEFUN_DLD(polyUnion, args, , "polyUnion help")
 		std::cout<<"Union conatins "<<solution.size()<<" disjoint polygon(s)"<<std::endl<<std::endl;
 		
 		for(int i = 0; i < solution.size(); ++i)
-	    {
-	        ClipperLib::Path p3 = solution.at(i);
-	       	//Vertex i.j represents jth vertex of ith disjoint polygon of the union
-	        for(int j = 0; j < p3.size(); ++j)
-	        {
-	            ClipperLib::IntPoint ip = p3.at(j);
-	            std::cout<<"Vertex "<<i+1<<"."<<j+1<<" : "<<ip.X<<" "<<ip.Y<<std::endl;
-	        }
+		{
+			ClipperLib::Path p3 = solution.at(i);
+			//Vertex i.j represents jth vertex of ith disjoint polygon of the union
+			for(int j = 0; j < p3.size(); ++j)
+			{
+			    ClipperLib::IntPoint ip = p3.at(j);
+			    std::cout<<"Vertex "<<i+1<<"."<<j+1<<" : "<<ip.X<<" "<<ip.Y<<std::endl;
+			}
 	        
 		}
 	}
